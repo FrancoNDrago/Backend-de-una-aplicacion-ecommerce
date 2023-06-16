@@ -1,0 +1,48 @@
+<div class="container-fluid bg-danger d-flex justify-content-center align-items-center" style="min-height: 100vh">
+    <div class="col-10 bg-dark opacity-75 text-white p-5">
+        <h1 class="text-white text-center">Carga de documentos de usuario</h1>
+        <input type="hidden" id="user_id" value="{{session.user._id}}">
+
+        <form id="form_user_documents">
+            <div class="mb-3">
+                <label for="identificacion" class="form-label">
+                    Identificacion:
+                    {{#if documents.identificacion}}
+                        <i class="fs-3 ms-2 fa-solid fa-circle-check text-success"></i>
+                    {{else}}
+                        <i class="fs-3 ms-2 fa-solid fa-circle-xmark text-danger"></i>
+                    {{/if}}
+                </label>
+                <input class="form-control" type="file" name="identificacion">
+            </div>
+            <div class="mb-3">
+                <label for="domicilio" class="form-label">
+                    Comprobante de Domicilio:
+                    {{#if documents.domicilio}}
+                        <i class="fs-3 ms-2 fa-solid fa-circle-check text-success"></i>
+                    {{else}}
+                        <i class="fs-3 ms-2 fa-solid fa-circle-xmark text-danger"></i>
+                    {{/if}}
+                </label>
+                <input class="form-control" type="file" name="domicilio">
+            </div>
+            <div class="mb-3">
+                <label for="estado_cuenta" class="form-label d-flex align-content-center">
+                    Comprobante de Estado de Cuenta:
+                    {{#if documents.estado_cuenta}}
+                        <i class="fs-3 ms-2 fa-solid fa-circle-check text-success"></i>
+                    {{else}}
+                        <i class="fs-3 ms-2 fa-solid fa-circle-xmark text-danger"></i>
+                    {{/if}}
+                </label>
+                <input class="form-control" type="file" name="estado_cuenta">
+            </div>
+            <div class="form-text text-white mb-3">Puede volver a enviar los documentos, estos deben estar en formato PDF!.</div>
+            <div class="d-flex justify-content-center">
+                <button type="submit" class="btn btn-danger">Cargar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="/js/userDocuments.js"></script>

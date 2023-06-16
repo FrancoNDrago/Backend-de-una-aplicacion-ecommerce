@@ -1,0 +1,178 @@
+paths:
+  /api/users/:
+    get:
+      summary: Obtener a todos los usuarios
+      tags:
+        - Users
+      responses:
+        "200":
+          description: Obtencion de usuarios exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#components/schemas/getUsersResponse'
+
+    delete:
+      summary: Borrar todos los usuarios expirados
+      tags:
+        - Users
+      responses:
+        "200":
+          description: Borrado de usuarios expirados exitosamente.
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#components/schemas/deleteExpiredUsersResponse'
+
+  /api/users/{uid}:
+    delete:
+      summary: Borrar un usuario
+      parameters:
+        - name: uid
+          in: path
+          required: true
+          description: Id del usuario que se borrara
+          schema:
+            $type: Strig
+      tags:
+        - Users
+      responses:
+        "200":
+          description: Borrado de usuario exitoso.
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#components/schemas/deleteUserResponse'
+
+  /api/users/premium/{uid}:
+    get:
+      summary: Modificacion de Rol de usuario
+      tags:
+        - Users
+      parameters:
+        - name: uid
+          in: path
+          required: true
+          description: Id del usuario al que se le cambiara el rol
+          schema:
+            $type: Strig
+      responses:
+        "200":
+          description: Rol de usuario modificado con exito.
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#components/schemas/rolChangeResponse'
+
+  /api/users/{uid}/documents:
+    post:
+      summary: Carga de documentacion de usuario
+      tags:
+        - Users
+      parameters:
+        - name: uid
+          in: path
+          required: true
+          description: Id del usuario al que se le cargara la documentacion
+          schema:
+            $type: String
+      responses:
+        "200":
+          description: Documentacion de usuario cargada con exito.
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#components/schemas/documentsResponse'
+
+components:
+  schemas:
+    getUsersResponse:
+      type: object
+      properties:
+        status:
+          type: String
+          description: Estado de la respuesta (success/error)
+        message:
+          type: String
+          description: Mensaje de respuesta
+        payload:
+          type: Array(object)
+          description: Array con datos de los usuarios
+      example:
+        status: success
+        message: Rol del usuario modificado a PREMIUM.
+        payload:
+          - {
+            _id: ObjectId(63ee738439933fa3bc31497f),
+            first_name: "Admin",
+            last_name: "Coder",
+            email: "adminCoder@coder.com",
+            age: 999,
+            rol: "user",
+            cart: "63ee6d96ddd3d89b0d00184f",
+            documents: [],
+            last_connection: "2023-06-02T17:03:55.292Z"
+          }
+
+    deleteExpiredUsersResponse:
+      type: object
+      properties:
+        status:
+          type: String
+          description: Estado de la respuesta (success/error)
+        message:
+          type: String
+          description: Mensaje de respuesta
+      example:
+        status: success
+        message: Usuarios eliminados exitosamente.
+
+    deleteUserResponse:
+      type: object
+      properties:
+        status:
+          type: String
+          description: Estado de la respuesta (success/error)
+        message:
+          type: String
+          description: Mensaje de respuesta
+      example:
+        status: success
+        message: Usuario eliminado con exito. ID ARG010203050607080970ARG.
+
+    rolChangeResponse:
+      type: object
+      properties:
+        status:
+          type: String
+          description: Estado de la respuesta (success/error)
+        message:
+          type: String
+          description: Mensaje de respuesta
+      example:
+        status: success
+        message: Rol del usuario modificado a PREMIUM.
+
+
+    documentsResponse:
+      type: object
+      properties:
+        status:
+          type: String
+          description: Estado de la respuesta (success/error)
+        message:
+          type: String
+          description: Mensaje de respuesta
+      example:
+        status: success
+        message: Documento/s cargado/s con exito.

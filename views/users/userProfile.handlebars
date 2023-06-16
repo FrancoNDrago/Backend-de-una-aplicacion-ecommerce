@@ -1,0 +1,18 @@
+<div class="container-fluid bg-danger d-flex justify-content-center align-items-center" style="min-height: 100vh">
+    <div class="col-10 bg-dark opacity-75 text-white p-5">
+        <div class="d-flex justify-content-evenly align-items-center">
+            <img src="/{{default_image_profile}}" alt="Imagen perfil {{user.first_name}} {{user.last_name}}" style="height:40vh">
+
+            <h1 class="text-center mb-3">{{user.first_name}} {{user.last_name}}</h1>
+            <input type="hidden" id="user_id" value="{{user._id}}">
+        </div>
+
+        <h5>Rol: {{user.rol}}</h5>
+        <h5>E-Mail: {{user.email}}</h5>
+        <h5>Edad: {{user.age}}</h5>
+        <h5>Ultima conexión: {{user.last_connection}}</h5>
+        <h4 class="text-danger">{{message}}</h4>
+    </div>
+</div>
+
+<script src="/js/profile.js"></script>

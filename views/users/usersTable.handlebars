@@ -1,0 +1,46 @@
+<div class="container-fluid bg-danger d-flex justify-content-center align-items-center" style="min-height: 100vh">
+    <div class="col-10 bg-dark opacity-75 text-white p-2">
+        <div class="d-flex flex-row-reverse">
+            <div>
+                <button id="btn_delete_expired_users" class="btn btn-danger me-3">Purgar Usuarios Expirados</button>
+            </div>
+        </div>
+        <table class="table table-dark table-hover bg-danger">
+              <thead>
+                <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">E-Mail</th>
+                    <th scope="col">Rol</th>
+                    <th scope="col">[Activo] Ultima conexion</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each users}}
+                <tr>
+                    <th>{{this.first_name}} {{this.last_name}}</th>
+                    <td>{{this.email}}</td>
+                    <td>{{this.rol}}</td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            {{#if this.showExpiredIcon }}
+                                <i class="me-2 fs-4 ms-2 fa-solid fa-circle-xmark text-danger"></i>
+                            {{else}}
+                                <i class="me-2 fs-4 ms-2 fa-solid fa-circle-check text-success"></i>
+                            {{/if}}
+                            {{this.last_connection}}
+                        </div>
+                    </td>
+                    <td class="d-flex justify-content-evenly">
+                        <a class="text-danger" href="/profile/{{this._id}}" title="Visualizar información"><i class="fa-solid fa-lg fa-eye"></i></a>
+                        <a class="text-danger" href="#" user_id="{{this._id}}" id="btn_change_rol" title="Modificar rol"><i class="fa-solid fa-lg fa-address-book"></i></a>
+                        <a class="text-danger" href="#" user_id="{{this._id}}" id="btn_delete" title="Eliminar usuario"><i class="fa-solid fa-lg fa-trash"></i></a>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="/js/usersTable.js"></script>
