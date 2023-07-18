@@ -57,8 +57,7 @@ if(cluster.isPrimary){
             
             io.emit("messages_log", messages);
         });
-    
-        // Evento de nuevo usuario.
+
         socket.on("new_user", async user=>{
             let messages = await messageDB.getMessages().lean();
             let validationObj = {
